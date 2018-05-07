@@ -10,4 +10,10 @@ PizzR is a Pizza Finder app that uses Yelp API, Google Maps API, and IPInfo to l
 
 ![Basic](assets/images/favicon.ico)
 
+## Screenshot
+
+![Basic](assets/images/Screenshot-pizzr.jpg)
+
+#### Jason Goncalves 2018
+
 
