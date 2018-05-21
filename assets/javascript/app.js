@@ -14,20 +14,19 @@ function init() {
         // console.log(appLocation[1]);
         // console.log('-----------------------');
 
-        // create a variable for latitude
-        let lat = appLocation[0];
-        // create a variable for longitude
-        let long = appLocation[1];
+        // // create a variable for latitude
+        // var lat = appLocation[0];
+        // // create a variable for longitude
+        // var long = appLocation[1];
 
-         
         // yelp api key
         const YELP_API = window.yelpKey
 
         // proxy URL to fix CORS issue
         const proxyURL = 'https://shielded-hamlet-43668.herokuapp.com/';
 
-        // concatenate the long and lat into the yelp api url. With a limit of 10 search results for Pizzeria
-        const yelpURL = 'https://api.yelp.com/v3/businesses/search?term=pizzeria&latitude=40.730771&longitude=-74.065707&limit=20';
+        // concatenate the long (-74.065707) and lat (40.730771) into the yelp api url. With a limit of 10 search results for Pizzeria
+        const yelpURL = `https://api.yelp.com/v3/businesses/search?term=pizzeria&latitude=${appLocation[0]}&longitude=${appLocation[1]}&limit=10`;
         $.ajax({
             // concatenate the proxyURL with the yelpURL for the CORS issue
             url: proxyURL + yelpURL,
@@ -63,10 +62,7 @@ function init() {
                 $(".results").append("<hr>");
             };
         });
-    });
-}
-
-// google api key
+        // google api key
 const googleAPIKey = window.googleKey;
 
 // set variables for the map
@@ -76,7 +72,13 @@ let infowindow;
 // create a function to request location and search query for google places
 function initMap() {
 
-    const apploc = { lat: 40.730771, lng: -74.065707 }; // we had to hard code the long and lat for now...
+    console.log(appLocation[0] + appLocation[1]);
+    var lat = parseFloat(appLocation[0]);
+    var long = parseFloat(appLocation[1]);
+    console.log(`Lat: ${lat} // Long: ${long}`);
+
+
+    const apploc = { lat: lat, lng: long }; // we had to hard code the long and lat for now...
     // in our request we cant to find pizzerias in a 500 feet radius of our current location
     const request = {
         location: apploc,
@@ -129,7 +131,8 @@ function createMarker(place) {
 
 // start the map
 initMap();
-
+    });
+}
 // start the app
 init();
 
